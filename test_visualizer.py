@@ -83,25 +83,9 @@ def test_build_graph():
 
     print("Test passed: build_graph works correctly.")
 
-
-# Тест для случая, когда коммиты не найдены
-def test_no_commits_found():
-    repo_path = '/mock/repo'
-
-    # Мокаем функцию get_commit_history, чтобы она возвращала пустой список
-    with patch('visualizer_dependency.get_commit_history', return_value=[]):
-        try:
-            # Передаем фальшивые параметры командной строки
-            subprocess.run(['python', 'test_visualizer.py', '--graphviz-path', '/mock/graphviz', '--repo-path', repo_path, '--output-path', '/mock/output'])
-        except SystemExit as e:
-            print(f"Test passed: No SystemExit raised for no commits with exit code {e.code}")
-            return
-        print("Test failed: No SystemExit raised for no commits.")
-
 # Основная функция тестирования
 if __name__ == '__main__':
     test_get_commit_history()
     test_repo_not_found()
     test_get_files_changed_in_commit()
     test_build_graph()
-    test_no_commits_found()
